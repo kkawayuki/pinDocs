@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Docs Home Pins",
+  "version": "0.1.0",
+  "description": "Resize document previews on the Google Docs home page and pin your favorite docs for quick access.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/document/*"
+      ],
+      "exclude_matches": [
+        "https://docs.google.com/document/d/*",
+        "https://docs.google.com/document/u/*/d/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Docs Home Pins"
+  }
+}

@@ -1,0 +1,126 @@
+/* Pin button, top-right of each document card. Shown on hover, or always once pinned. */
+.docs-homescreen-grid-item {
+  position: relative;
+}
+
+.dhp-pin {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #dadce0;
+  border-radius: 50%;
+  background: #fff;
+  fill: #5f6368;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.docs-homescreen-grid-item:hover .dhp-pin,
+.dhp-pin:focus-visible,
+.dhp-pin.dhp-pinned {
+  opacity: 1;
+}
+
+.dhp-pin:hover {
+  background: #f1f3f4;
+}
+
+.dhp-pin.dhp-pinned {
+  fill: #1a73e8;
+  border-color: #1a73e8;
+}
+
+/* Google's "Start a new document" section, replaced by the New document card. */
+.dhp-hidden {
+  display: none !important;
+}
+
+/* Pinned docs' own cards in Recent documents: they show in Pinned documents instead. */
+.dhp-hidden-card {
+  display: none !important;
+}
+
+/* "Pinned documents", above "Recent documents". Set by content.js:
+   --dhp-left / --dhp-width line it up with the Recent documents cards,
+   --dhp-top keeps it below the search bar, --dhp-bottom closes the gap above
+   Recent documents, and --dhp-gap-x / --dhp-gap-y / --dhp-card-margin-right
+   copy the spacing between Google's cards. */
+#dhp-pinned {
+  box-sizing: border-box;
+  width: var(--dhp-width, 100%);
+  margin: var(--dhp-top, 0) 0 var(--dhp-bottom, 24px) var(--dhp-left, 0);
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+.dhp-heading {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #202124;
+}
+
+.dhp-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--dhp-gap-y, 16px) var(--dhp-gap-x, 16px);
+  margin-right: calc(-1 * var(--dhp-card-margin-right, 0px));
+}
+
+/* The copies open their doc themselves; Google's "More actions" menu isn't wired up on them. */
+.dhp-card {
+  cursor: pointer;
+}
+
+.dhp-card .docs-homescreen-item-overflow {
+  visibility: hidden;
+}
+
+/* Dragging to reorder: a copy follows the pointer, and the card's spot in the
+   grid becomes a gray drop shadow (same size, contents hidden) showing where
+   it will land. */
+.dhp-placeholder {
+  border-color: transparent !important;
+  border-radius: 8px;
+  background: #e8eaed !important;
+  box-shadow: none !important;
+}
+
+.dhp-placeholder > * {
+  visibility: hidden;
+}
+
+.dhp-ghost {
+  position: fixed !important;
+  z-index: 10000;
+  margin: 0 !important;
+  pointer-events: none;
+  /* It's outside Google's grid, so it may not pick up the card background. */
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(60, 64, 67, 0.35);
+  transform: rotate(2deg);
+  cursor: grabbing;
+}
+
+/* New document card: a + on a blank preview, like Google's blank-document tile. */
+.dhp-new-card .docs-homescreen-grid-item-thumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff none !important;
+}
+
+.dhp-hint {
+  align-self: center;
+  margin: 0;
+  color: #5f6368;
+  font-size: 14px;
+}
