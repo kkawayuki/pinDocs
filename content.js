@@ -384,8 +384,8 @@ function alignSection() {
   // Shift the section's current left margin by however far it is from the cards.
   const margin = parseFloat(getComputedStyle(section).marginLeft) + left - section.getBoundingClientRect().left;
   // Only written when they change, since the page observer also watches style attributes.
-  setVar('--dhp-left', `${Math.round(margin)}px`);
-  setVar('--dhp-width', `${Math.round(right - left)}px`);
+  setVar('--dhp-left', `${margin}px`);
+  setVar('--dhp-width', `${right - left}px`);
 
   // Space between Google's cards beyond their own margins (which the copies keep).
   // (Pinned docs' cards are hidden in Recent documents and measure 0 wide, so
@@ -393,17 +393,17 @@ function alignSection() {
   const cs = getComputedStyle(first);
   if (firstRow[1]) {
     const gap = firstRow[1][1].left - firstRect.right - parseFloat(cs.marginRight) - parseFloat(cs.marginLeft);
-    setVar('--dhp-gap-x', `${Math.max(0, Math.round(gap))}px`);
+    setVar('--dhp-gap-x', `${Math.max(0, gap)}px`);
   }
   const below = cards.find(([, r]) => r.top > firstRect.bottom);
   if (below) {
     const gap = below[1].top - firstRect.bottom - parseFloat(cs.marginBottom) - parseFloat(cs.marginTop);
-    setVar('--dhp-gap-y', `${Math.max(0, Math.round(gap))}px`);
+    setVar('--dhp-gap-y', `${Math.max(0, gap)}px`);
   }
   // Google's cards keep their right margin even at the end of a row (its grid
   // is wider than the cards to fit it), so the copies' grid needs that room
   // too, or the last card of each row wraps.
-  setVar('--dhp-card-margin-right', `${Math.round(parseFloat(cs.marginRight))}px`);
+  setVar('--dhp-card-margin-right', `${parseFloat(cs.marginRight)}px`);
   dropBelowHeader();
   closeGapBelow();
 }
